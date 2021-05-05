@@ -1,24 +1,41 @@
-const express = require('express')
-const fs = require('fs')
-const path = require('path')
+const express = require("express");
+const fs = require("fs");
+const path = require("path");
 
-const router = express.Router()
+const router = express.Router();
 
-const data = []
+let data = fs.readFileSync("notes.json");
+let notes = JSON.parse(data);
 
-router.get('/', (req,res,next) => {
-    res.render('index', { products: data, title: "Shopping List" })
-})
+router.get("/", (req, res, next) => {
+  res.render("index");
+});
 
-router.post('/add-product', (req,res,next) => {
-    data.push({
-        id: Math.random(),
-        product: req.body.product
-    })
+router.get("/read", (req, res, next) => {
+  res.render("read", { notes: notes });
+});
 
-    fs.writeFile(path.join(__dirname, '..', 'products.json'), JSON.stringify(data, null, 2), () => {
-        res.status(302).redirect('/')
-    })
-})
+router.get("/leave", (req, res, next) => {
+  res.render("leave");
+});
 
-module.exports = router
+router.post("/add-note", (req, res, next) => {
+  notes.push({
+    id: Math.random(),
+    note: req.body.note,
+  });
+
+  fs.writeFile(
+    path.join(__dirname, "..", "notes.json"),
+    JSON.stringify(notes, null, 2),
+    () => {
+      res.status(302).redirect("/");
+    }
+  );
+});
+
+router.get("*", function (req, res) {
+  res.status(404).render("404");
+});
+
+module.exports = router;

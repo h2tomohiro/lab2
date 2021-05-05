@@ -8,9 +8,13 @@
     <title>Guestbook</title>
   </head>
   <body>
-    <h1>Guestbook</h1>
+    <h1>Read notes</h1>
     <br />
-    <a href="leave">Leave notes</a>
-    <a href="read">Read notes</a>
+    <ul>
+      <% for(let i = 0; i < notes.length; i++){ %>
+      <li><%= notes[i].note %></li>
+      <% } %>
+    </ul>
+    <a href="/">HOME</a>
   </body>
 </html>

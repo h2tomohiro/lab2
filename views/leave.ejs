@@ -8,9 +8,12 @@
     <title>Guestbook</title>
   </head>
   <body>
-    <h1>Guestbook</h1>
+    <h2>Leave notes</h2>
+    <form action="/add-note" method="POST">
+      <input type="text" name="note" />
+      <button type="submit">Submit</button>
+    </form>
     <br />
-    <a href="leave">Leave notes</a>
-    <a href="read">Read notes</a>
+    <a href="/">HOME</a>
   </body>
 </html>
