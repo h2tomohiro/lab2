@@ -8,8 +8,7 @@
     <title>Guestbook</title>
   </head>
   <body>
-    <h1>Read notes</h1>
-    <br />
+    <h1><%= title %></h1>
     <ul>
       <% for(let i = 0; i < notes.length; i++){ %>
       <li><%= notes[i].note %></li>
